@@ -1,0 +1,6 @@
+notes.txt
+*.o
+*.swp
+/mlx_linux
+/tests
+*.DS_Store
