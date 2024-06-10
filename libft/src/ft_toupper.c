@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauriago <lauriago@student.42barcel>       +#+  +:+       +#+        */
+/*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 19:08:08 by lauriago          #+#    #+#             */
-/*   Updated: 2023/09/21 19:10:17 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:43:42 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 int	ft_toupper(int c)
 {

@@ -6,11 +6,11 @@
 /*   By: lauriago <lauriago@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:21:49 by lauriago          #+#    #+#             */
-/*   Updated: 2023/09/27 16:30:37 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:40:12 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 int	ft_atoi(const char *str)
 {
@@ -19,18 +19,17 @@ int	ft_atoi(const char *str)
 
 	result = 0;
 	n = 1;
-	while (*str && ft_isspace(*str))
+	while (*str && (*str == '\n' || *str == '\t' || *str == '\v'
+			|| *str == '\f' || *str == '\r' || *str == ' '))
+	{
 		str++;
+	}
+	if (*str && *str == '-')
+		n = -1;
 	if (*str && (*str == '+' || *str == '-'))
+		str++;
+	while (*str && *str >= '0' && *str <= '9')
 	{
-		if (*str == '-')
-			n = -1;
-	}	str++;
-	while (*str && ft_isdigit(*str))
-	{
-		if ((result > INT_MAX / 10) || (result == INT_MAX / 10 && 
-					*str - '0' > INT_MAX % 10))
-			return (n == 1) ? INT_MAX : INT_MIN;
 		result = result * 10 + (*str - 48);
 		str++;
 	}
@@ -38,7 +37,7 @@ int	ft_atoi(const char *str)
 }
 /*
 int main() {
-    const char *str = " -0000000023967";
+    const char *str = " -67";
 
     printf("%d\n", ft_atoi(str));
     printf("Funcion oficial: %d\n", atoi(str));

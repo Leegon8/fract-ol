@@ -6,11 +6,11 @@
 /*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:15:43 by lauriago          #+#    #+#             */
-/*   Updated: 2023/10/14 21:32:16 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:41:54 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

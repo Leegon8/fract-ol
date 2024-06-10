@@ -6,11 +6,11 @@
 /*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:28:03 by lauriago          #+#    #+#             */
-/*   Updated: 2023/10/12 14:39:21 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:43:05 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {

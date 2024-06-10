@@ -6,11 +6,11 @@
 /*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 12:45:40 by lauriago          #+#    #+#             */
-/*   Updated: 2023/09/27 19:25:58 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:41:40 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 int	ft_isascii(int c)
 {

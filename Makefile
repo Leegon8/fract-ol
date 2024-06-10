@@ -5,26 +5,61 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/26 17:02:00 by lauriago          #+#    #+#              #
-#    Updated: 2024/04/26 17:29:13 by lauriago         ###   ########.fr        #
+#    Created: 2024/04/25 15:48:56 by lauriago          #+#    #+#              #
+#    Updated: 2024/06/05 12:43:25 by lauriago         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
+SRC = fractal.c render.c set_init.c utils.c mandelbrot.c hooks.c
+SRC_PATH = ./src/
+OBJ_PATH = ./obj/
+OBJ  = $(addprefix $(OBJ_PATH), $(SRC:.c=.o))
+H_PATH = ./inc/
+HEADERS = -I$(H_PATH)
 
-SCR = test_run.c
+RM = rm -f
+CC = gcc
+FLAGS = -g -Wall -Wextra -Werror
+LINKS = -Llibft -Lmlx -lmlx -framework OpenGL -framework AppKit
+LIBFT = libft/libft.a
+#MLX = mlx/libmlx.a
+MLX_LINUX = mlx_linux/libmlx.a
+#LINKS = -I libft -L libft \
+		-Lmlx -lmlx -framework OpenGL -framework AppKit \
+		#-I /usr/local/include -L /usr/local/lib
+LINKS =	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+		
 
-OBJECTS = $(subst .c, .o, $(SCR))
+all: makelib $(NAME)
 
-FLAGS = -Wall -Wextra #-Werror
+makelib:
+	$(MAKE) --silent -C libft --no-print-directory
+	$(MAKE) --silent -C mlx_linux --no-print-directory
 
-FT_L = -I libft -L libft
+$(OBJ_PATH):
+	mkdir -p $(OBJ_PATH)
 
-MLX_D = minilibx-linux
-MLX_LIB = $(addprefix $(MLX_D)/, libmlx.a)
-MLX_F = = -L $(MLX_D) -l mlx -L/usr/lib -I$(MLX_D) -lXext -lX11 -lz
+$(NAME): $(OBJ)
+	$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(LINKS) -o $(NAME)
 
-#________________RULES__________#
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c Makefile $(H_PATH) | $(OBJ_PATH)  
+	$(CC) $(FLAGS) $(HEADERS) -c $< -o $@	
 
-$(NAME): $(OBJECTS)
-	gcc $(SRC) -o $(NAME) $(FLAGS) $(MLX_F) $(FT_L)
+clean :
+	$(RM) -r $(OBJ_PATH)
+	$(MAKE) --silent -C libft clean
+	$(MAKE) --silent -C mlx_linux clean
+
+fclean :
+	$(RM) -r $(NAME) $(OBJ_PATH)
+	$(MAKE) --silent -C libft fclean
+	$(MAKE) --silent -C mlx_linux clean
+
+re :
+	make fclean --silent
+	make all --silent
+	$(MAKE) all --silent -C libft
+	$(MAKE) all --silent -C mlx_linux
+
+.PHONY: all clean fclean re

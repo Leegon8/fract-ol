@@ -6,11 +6,11 @@
 /*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:27:04 by lauriago          #+#    #+#             */
-/*   Updated: 2023/10/12 13:39:08 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:42:12 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauriago <lauriago@student.42barcel>       +#+  +:+       +#+        */
+/*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 20:02:01 by lauriago          #+#    #+#             */
-/*   Updated: 2023/10/14 20:02:22 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:43:28 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 char	*ft_strnstr(const char *cpr, const char *subc, size_t n)
 {

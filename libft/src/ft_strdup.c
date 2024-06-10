@@ -6,11 +6,11 @@
 /*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:30:53 by lauriago          #+#    #+#             */
-/*   Updated: 2023/10/12 13:37:06 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:42:58 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 char	*ft_strdup(const char *src)
 {

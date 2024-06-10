@@ -6,11 +6,11 @@
 /*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 19:11:52 by lauriago          #+#    #+#             */
-/*   Updated: 2023/09/27 19:20:07 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:41:51 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

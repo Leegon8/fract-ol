@@ -6,7 +6,7 @@
 /*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 11:38:11 by lauriago          #+#    #+#             */
-/*   Updated: 2024/06/07 13:09:33 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/06/07 23:27:04 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ static void	my_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)offset = color;
 }
 
-void	fractal_render(t_fractal *f)
+void	fractal_render(t_fractal *f, color_func *g_color_schemes)
 {
 	int	y;
 	int	x;
+	int	iter;
+	//t_color	color;
 
 	y = -1;
 	while (++y < HEIGHT)
@@ -36,22 +38,15 @@ void	fractal_render(t_fractal *f)
 			//la A es un num real y Bi uno imaginario. 
 			f->r.r = map_to_real(x, WIDTH, -2.0, 2.0);
 			f->r.i = map_to_imaginary(y, HEIGHT, -2.0, 2.0);
-			if (set_mandelbrot(f->r.r, f->r.i) == 1)
-			{
-				my_pixel_put(&f->img, x, y, NEON_ORANGE);	
-			}
-			else if (set_mandelbrot(f->r.r, f->r.i) == 0)
-			{
-				my_pixel_put(&f->img, x, y, AQUA_DREAM);	
-			}
+            iter = set_mandelbrot(f->r.r, f->r.i, f->max_iter, f->escape_value);
+            f->color = g_color_schemes[f->color_scheme](iter, MAX_ITER);
+            my_pixel_put(&f->img, x, y, f->color);
 		}
 	}
 	mlx_put_image_to_window(f->mlx, f->win, f->img.img, 0, 0);
 }
 
 /*
-//	handle_pixel function tells the coordinates of the window map for verify
-//	if the actual iteration is part of the set.
 void	handle_pixel(int x, int y, t_fractal *f)
 {
 	t_complex	z;

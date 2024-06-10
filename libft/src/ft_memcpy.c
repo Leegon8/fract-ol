@@ -6,11 +6,11 @@
 /*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 19:56:40 by lauriago          #+#    #+#             */
-/*   Updated: 2023/10/14 21:23:10 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:41:56 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {

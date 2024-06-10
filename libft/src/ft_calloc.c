@@ -6,11 +6,11 @@
 /*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 13:39:56 by lauriago          #+#    #+#             */
-/*   Updated: 2023/10/12 16:24:06 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:41:32 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {

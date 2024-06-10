@@ -1,4 +1,16 @@
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/24 15:51:32 by lauriago          #+#    #+#             */
+/*   Updated: 2024/04/27 17:41:28 by lauriago         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../inc/libft.h"
 
 long	ft_atol(const char *str)
 {
@@ -9,11 +21,8 @@ long	ft_atol(const char *str)
 	i = 0;
 	nbr = 0;
 	isneg = 0;
-	while (str[i] == 32 || str[i] == '\t'
-			|| str[i] == '\n'
-			|| str[i] == '\r'
-			|| str[i] == '\v'
-			|| str[i] == '\f')
+	while (str[i] == 32 || str[i] == '\t' || str[i] == '\n' || str[i] == '\r'
+		|| str[i] == '\v' || str[i] == '\f')
 		i++;
 	if (str[i] && str[i] == '-')
 	{

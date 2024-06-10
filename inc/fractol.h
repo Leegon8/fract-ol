@@ -16,8 +16,12 @@
 #include "../mlx_linux/mlx.h"
 # include "libft.h"
 # include <math.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <stdio.h>
-
+# include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
 /*# define NULL "__null"*/
 
 /*	Dimentions	*/
@@ -25,9 +29,13 @@
 # define ESCAPE_RADIUS 2.0
 # define WIDTH 1024
 # define HEIGHT 780
+# define COLOR_SCHEME_COUNT 5
 
 /*	Hooks	*/
-# define ESC 53 
+# define ESC 65307 
+# define COLOR 99
+# define MAS 65451
+# define MENOS 65453
 // # define ARROW_UP 126
 // # define ARROW_DOWN 125
 // # define ARROW_LEFT 124
@@ -35,9 +43,7 @@
 # define ZOOM_IN 5
 # define ZOOM_OUT 4
 # define LEFT_CLICK 1
-# define ESPACE 49
-# define MAS 69
-# define MENOS 78
+# define SPC 32
 
 /*	 Fractal sets	*/
 # define MANDELBROT 83
@@ -49,22 +55,7 @@
 # define CORRECT_MANDELBROT_SET "\t\"./fractol mandelbrot\" OR\n"
 # define CORRECT_JULIA_SET "\t\"./fractol julia <value 1> <value 2>\"\n"
 
-/*	 Color definitions	*/
-#define BLACK       0x000000  // RGB(0, 0, 0)
-#define WHITE       0xFFFFFF  // RGB(255, 255, 255)
-#define RED         0xFF0000  // RGB(255, 0, 0)
-#define GREEN       0x00FF00  // RGB(0, 255, 0)
-#define BLUE        0x0000FF  // RGB(0, 0, 255)
-
-// Psychedelic colors
-#define MAGENTA_BURST   0xFF00FF  // A vibrant magenta
-#define LIME_SHOCK      0xCCFF00  // A blinding lime
-#define NEON_ORANGE     0xFF6600  // A blazing neon orange
-#define PSYCHEDELIC_PURPLE 0x660066  // A deep purple
-#define AQUA_DREAM      0x33CCCC  // A bright turquoise
-#define HOT_PINK        0xFF66B2  // As the name suggests!
-#define ELECTRIC_BLUE   0x0066FF  // A radiant blue
-#define LAVA_RED        0xFF3300  // A bright, molten red
+typedef int (*color_func)(int, int);
 
 /*	 Complex number struct	 */
 typedef	struct s_complex
@@ -103,27 +94,48 @@ typedef	struct s_fract
 	//other data
 	double	escape_value;
 	double	zoom;
+	int		max_iter;
 	
-	int		*palette;
-	int		color_pattern;
-	int		color;
+	unsigned int		color;
+	int	color_scheme;
+
+	int mouse_x;
+    int mouse_y;
+
 }	t_fractal;
 
 /*____________SET INIT____________*/
 void		init_fractal(t_fractal *f);
-//static void	data_init(t_fractal *f);
 
 /*____________RENDER______________*/
-void		fractal_render(t_fractal *f);
-//void		handle_pixel(int x, int y, t_fractal *f);
+void		fractal_render(t_fractal *f, color_func *g_color_schemes);
+void		handle_pixel(int x, int y, t_fractal *f);
+
 /*___________MANDELBROT SET_______*/
-int	is_mandel(char *name);
-int	set_mandelbrot(double r, double i);
+int 		set_mandelbrot(double r, double i, int max_iter, double escape_value);
 
 /*____________UTILS______________*/
 double		map_to_real(int x, int width, double min_r, double max_r);
 double		map_to_imaginary(int y, int height, double min_i, double max_i);
+int			color_one(int iter, int max_iter);
+int			color_two(int iter, int max_iter);
+int 		color_wave(int iter, int max_iter);
+int			color_third(int iter, int max_iter);
+int 		color_nuclear(int iter, int max_iter);
+int			color_five(int iter, int max_iter);
+int 		color_six(int iter, int max_iter);
 void		malloc_error(void);
-int		ft_close(t_fractal *f);
+int			ft_close(t_fractal *f);
+
+/*___________HOOKS_____________*/
+//void	hooks_init(t_fractal *f);
+int 		handle_key(int keycode, t_fractal *f);
+int			mouse_handler(int button, int x, int y, t_fractal *f);
+int 		handle_mouse_move(int x, int y, t_fractal *f);
+int			mouse_zoom(int button, t_fractal *f);
+void		hook_init(t_fractal *f);
+
+
+extern color_func g_color_schemes[];
 
 # endif

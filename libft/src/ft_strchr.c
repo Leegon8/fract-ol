@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauriago <lauriago@student.42barcel>       +#+  +:+       +#+        */
+/*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 13:11:44 by lauriago          #+#    #+#             */
-/*   Updated: 2023/09/22 13:15:48 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:42:53 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

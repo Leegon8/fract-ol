@@ -6,11 +6,12 @@
 /*   By: lauriago <lauriago@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:30:42 by lauriago          #+#    #+#             */
-/*   Updated: 2023/09/24 17:32:14 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/05/06 10:55:38 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/libft.h"
+//#include "stdio.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -28,8 +29,8 @@ int	ft_strcmp(const char *s1, const char *s2)
 /*
 int main(void)
 {
-	char s1[] = "12345";
-	char s2[] = "125";
+	char s1[] = "Julia";
+	char s2[] = "julia";
 
 	printf("%d\n", ft_strcmp(s1, s2));
 	printf("%d\n", strcmp(s1, s2));

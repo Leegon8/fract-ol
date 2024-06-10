@@ -10,10 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
 #include "../inc/fractol.h"
 #include "../mlx_linux/mlx.h"
-//#include "../mlx/mlx.h"
 
 static void	data_init(t_fractal *f)
 {
@@ -21,8 +19,18 @@ static void	data_init(t_fractal *f)
 	f->zx = 0.0;
 	f->zy = 0.0;
 	f->zoom = 1.0;
+	f->img.bpp = 32;
+	f->max_iter = 42;
+	f->color_scheme = 0;
 }
 
+int handle_mouse_move(int x, int y, t_fractal *f)
+{
+	f->mouse_x = x;
+	f->mouse_y = y;
+	printf("Mouse moved to: (%d, %d)\n", x, y);
+	return (0);
+}
 
 void	init_fractal(t_fractal *f)
 {
@@ -31,8 +39,9 @@ void	init_fractal(t_fractal *f)
 	f->img.img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
 	f->img.addr = mlx_get_data_addr(f->img.img, &f->img.bpp,
 			&f->img.line_len, &f->img.endian);
-	//events_init(f); //TODO
+	hook_init(f);
 	data_init(f);
+	//mlx_loop(f->mlx);
 }
 
 /*void	init_fractal(t_fractal *f)

@@ -6,7 +6,7 @@
 #    By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 12:49:15 by lauriago          #+#    #+#              #
-#    Updated: 2024/03/02 18:09:49 by lauriago         ###   ########.fr        #
+#    Updated: 2024/06/02 11:09:11 by lauriago         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,10 @@ SRCS =  ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 		
 SRC_PATH = ./src/
 OBJ_PATH = ./tmp/
-OBJS = $(addprefix $(OBJ_PATH), $(SRCS:.c=.o))
+OBJS = $(addprefix $(OBJ_PATH),$(SRCS:.c=.o))
 
-H_PATH = ../inc
-HEADERS = -I$(H_PATH)
+#H_PATH = ../inc
+#HEADERS = -I$(H_PATH)
 
 #VARIABLES#
 
