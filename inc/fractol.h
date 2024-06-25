@@ -40,8 +40,8 @@
 // # define ARROW_DOWN 125
 // # define ARROW_LEFT 124
 // # define ARROW_RIGHT 123
-# define ZOOM_IN 5
-# define ZOOM_OUT 4
+# define ZOOM_IN 4
+# define ZOOM_OUT 5
 # define LEFT_CLICK 1
 # define SPC 32
 
@@ -86,9 +86,9 @@ typedef	struct s_fract
 	
 	double	zx;
 	double	zy;
-	double	julia_x;
-	double	julia_y;
-	t_complex	r;
+	double	jr;
+	double	ji;
+	t_complex	z;
 	t_complex	c;
 
 	//other data
@@ -96,11 +96,12 @@ typedef	struct s_fract
 	double	zoom;
 	int		max_iter;
 	
-	unsigned int		color;
-	int	color_scheme;
+	unsigned int	color;
+	int		color_scheme;
 
-	int mouse_x;
-    int mouse_y;
+	int		mouse_x;
+	int 	mouse_y;
+	int     is_dragging;
 
 }	t_fractal;
 
@@ -108,15 +109,20 @@ typedef	struct s_fract
 void		init_fractal(t_fractal *f);
 
 /*____________RENDER______________*/
-void		fractal_render(t_fractal *f, color_func *g_color_schemes);
-void		handle_pixel(int x, int y, t_fractal *f);
+void		fractal_render(t_fractal *f);
+int		handle_pixel(t_fractal *f);
 
 /*___________MANDELBROT SET_______*/
 int 		set_mandelbrot(double r, double i, int max_iter, double escape_value);
+int	set_julia(t_fractal *f, double zr, double zi);
+//int			set_julia(t_complex z, t_complex c, int max_iter, double escape_value);
 
 /*____________UTILS______________*/
-double		map_to_real(int x, int width, double min_r, double max_r);
-double		map_to_imaginary(int y, int height, double min_i, double max_i);
+//double		map_to_real(int x, int width, double min_r, double max_r);
+//double		map_to_imaginary(int y, int height, double min_i, double max_i);
+double map_to_real(int x, int width, double center_r, double zoom);
+double map_to_imaginary(int y, int height, double center_i, double zoom);
+
 int			color_one(int iter, int max_iter);
 int			color_two(int iter, int max_iter);
 int 		color_wave(int iter, int max_iter);
@@ -131,8 +137,9 @@ int			ft_close(t_fractal *f);
 //void	hooks_init(t_fractal *f);
 int 		handle_key(int keycode, t_fractal *f);
 int			mouse_handler(int button, int x, int y, t_fractal *f);
-int 		handle_mouse_move(int x, int y, t_fractal *f);
-int			mouse_zoom(int button, t_fractal *f);
+int 		mouse_move(int x, int y, t_fractal *f);
+int	mouse_press(int button, int x, int y, t_fractal *f);
+int	mouse_release(int button, t_fractal *f);
 void		hook_init(t_fractal *f);
 
 

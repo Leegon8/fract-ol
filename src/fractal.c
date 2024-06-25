@@ -22,16 +22,26 @@ color_func	g_color_schemes[] = {
 	color_five,
 	color_six};
 
+
+
 int	main(int ac, char **av)
 {
 	t_fractal	f;
 
-	if ((ac == 2 && ft_strcmp(av[1], "mandelbrot") == 0)
-		|| (ac == 4 && ft_strcmp(av[1], "julia") == 0))
+	if (ac == 2 && ft_strcmp(av[1], "mandelbrot") == 0)
 	{
 		f.name = av[1];
 		init_fractal(&f);
-		fractal_render(&f, g_color_schemes);
+		fractal_render(&f);
+		mlx_loop(f.mlx);
+	}
+	else if (ac == 4 && ft_strcmp(av[1], "julia") == 0)
+	{
+		f.name = av[1];
+		f.jr = ft_atod(av[2]);
+		f.ji = ft_atod(av[3]);
+		init_fractal(&f);
+		fractal_render(&f);
 		mlx_loop(f.mlx);
 	}
 	else

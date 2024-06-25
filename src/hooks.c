@@ -15,14 +15,16 @@
 
 // 1. gestionar zoom -> segun coordenadas del ratón 
 //	hacer la iteración multiplicado x 1.5
+//	Al apretar 1 (49) -> Fractol Mandelbrot
+//	Al apretar 2 (50) -> Fractol Julia
 // 2. detectar click izquierdo y permitir que cuando
 //	arrastre el plano, las coordenadas se muevan
 // (bonus)---------------------
 // 3. Al apretar la letra C, cambiar color
-// 	hacer variaciones de colores
+// 	hacer variaciones de colores 
 // 4. En el fractal de julia con las flechas del teclado
 //	permitir que las coordenadas del fractal cambien
-// 5. Al apretar la letra I, cambiar valor MAX_ITER
+// 5. Al apretar la letra +, cambiar valor MAX_ITER
 // 6. Al apretar la cruz de la ventana se para el programa
 // (bonus)----------------------
 // 7. Al apretar ESC finaliza el programa
@@ -35,35 +37,82 @@ int handle_key(int keycode, t_fractal *f)
 	{
 		if (f->max_iter < 300)
 			f->max_iter += 50;
-		fractal_render(f, g_color_schemes);
+		fractal_render(f);
 	}
 	if (keycode == MENOS)
 	{
 		f->max_iter -= 42;
-		fractal_render(f, g_color_schemes);
+		fractal_render(f);
 	}
 	else if (keycode == COLOR)
 	{
 		f->color_scheme = (f->color_scheme + 1) % 7;
-		fractal_render(f, g_color_schemes);
+		fractal_render(f);
 	}
 	printf("Tecla presionada: %d\n", keycode);
 	printf("MAX_ITER = %d\n", f->max_iter);
 	return (0);
 }
 
-int mouse_move(int x, int y, t_fractal *fract)
+int mouse_move(int x, int y, t_fractal *f)
 {
-    fract->mouse_x = x;
-    fract->mouse_y = y;
-    printf("Mouse position: (%d, %d)\n", fract->mouse_x, fract->mouse_y);
+    double mouse_r = map_to_real(x, WIDTH, f->zx - 2.0 / f->zoom, f->zx + 2.0 / f->zoom);
+    double mouse_i = map_to_imaginary(y, HEIGHT, f->zy - 2.0 / f->zoom, f->zy + 2.0 / f->zoom);
+
+	if (mouse_press(LEFT_CLICK, x, y, f) == 0)
+    {
+		f->zx = mouse_r;
+    	f->zy = mouse_i;
+	}
+	fractal_render(f);
+	return (0);
+}
+
+int	mouse_press(int button, int x, int y, t_fractal *f)
+{
+	while (button == LEFT_CLICK)
+	{
+		f->is_dragging = 1;
+		f->mouse_x = x;
+		f->mouse_y = y;
+	}
+	return (0);
+}
+
+int	mouse_release(int button, t_fractal *f)
+{
+    if (button == 1) // Botón izquierdo del ratón
+    {
+        f->is_dragging = 0;
+    }
     return (0);
+}
+
+int	mouse_handler(int button, int x, int y, t_fractal *f)
+{
+	double	mouse_r;
+	double	mouse_i;
+	double	interpolation;
+
+	//printf("mouse_handler called with button %d\n", button);
+	mouse_r = map_to_real(x, WIDTH, f->zx, f->zoom);
+	mouse_i = map_to_imaginary(y, HEIGHT, f->zy, f->zoom);
+	if (button == ZOOM_IN)
+		interpolation = 1.1;
+	else if (button == ZOOM_OUT)
+		interpolation = 1 / 1.1;
+	f->zx = mouse_r + (f->zx - mouse_r) * interpolation;
+	f->zy = mouse_i + (f->zy - mouse_i) * interpolation;
+	f->zoom *= interpolation;
+	fractal_render(f);
+	return (0);
 }
 
 void	hook_init(t_fractal *f)
 {
 	mlx_hook(f->win, KeyPress, KeyPressMask, handle_key, f);
-	mlx_hook(f->win, 6, 1L<<6, mouse_move, f);
-	//mlx_hook(f->win, ButtonPress, ButtonPressMask, mouse_handler, f);
-	//mlx_hook(f->win, MotionNotify, PointerMotionMask, &mouse_handler, f);
+	mlx_hook(f->win, ButtonPress, ButtonPressMask, mouse_press, f);
+	mlx_hook(f->win, ButtonRelease, ButtonReleaseMask, mouse_release, f);
+	//mlx_hook(f->win, MotionNotify, PointerMotionMask, mouse_move, f);
+	mlx_hook(f->win, 4, 1L<<2, mouse_handler, f);
 }

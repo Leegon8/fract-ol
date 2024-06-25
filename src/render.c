@@ -20,34 +20,76 @@ static void	my_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)offset = color;
 }
 
-void	fractal_render(t_fractal *f, color_func *g_color_schemes)
+static void	set_render(t_complex *z, t_complex *c, t_fractal *f)
+{
+	
+	if (ft_strcmp(f->name, "julia") == 0)
+	{
+		c->r = f->jr;
+		c->i = f->ji;
+	}
+	else
+	{
+		c->r = z->r;
+		c->i = z->i;
+	}
+}
+
+//Mapeo las coordenadas X e Y para interpretarlas en un
+//plano complejo (Zn = Zn² + C) --> C = a + bi;
+//la A es un num real y Bi uno imaginario.
+void	fractal_render(t_fractal *f)
 {
 	int	y;
 	int	x;
 	int	iter;
-	//t_color	color;
 
+	iter = 0;
 	y = -1;
 	while (++y < HEIGHT)
 	{
 		x = -1;
 		while (++x < WIDTH)
 		{
-			//Mapeo las coordenadas X e Y para interpretarlas en un
-			//plano complejo (Zn = Zn² + C) --> C = a + bi;
-			//la A es un num real y Bi uno imaginario. 
-			f->r.r = map_to_real(x, WIDTH, -2.0, 2.0);
-			f->r.i = map_to_imaginary(y, HEIGHT, -2.0, 2.0);
-            iter = set_mandelbrot(f->r.r, f->r.i, f->max_iter, f->escape_value);
-            f->color = g_color_schemes[f->color_scheme](iter, MAX_ITER);
-            my_pixel_put(&f->img, x, y, f->color);
+			f->z.r = map_to_real(x, WIDTH, f->zx, f->zoom);
+			f->z.i = map_to_imaginary(y, HEIGHT, f->zy, f->zoom);
+			set_render(&f->z, &f->c, f);
+			iter = handle_pixel(f);
+			f->color = g_color_schemes[f->color_scheme](iter, MAX_ITER);
+			my_pixel_put(&f->img, x, y, f->color);
+			
+
+
+			/*//f->r.r = map_to_real(x, WIDTH, -2.0, 2.0);
+			//f->r.i = map_to_imaginary(y, HEIGHT, -2.0, 2.0);
+			f->r.r = map_to_real(x, WIDTH, f->zx, f->zoom);
+			f->r.i = map_to_imaginary(y, HEIGHT, f->zy, f->zoom);
+			if (set_render(f) == 1)
+				iter = set_mandelbrot(f->r.r, f->r.i, f->max_iter, f->escape_value);
+			else if (set_render(f) == 0)
+				iter = set_julia(f->r, f->c, MAX_ITER, f->escape_value);
+			f->color = g_color_schemes[f->color_scheme](iter, MAX_ITER);
+			my_pixel_put(&f->img, x, y, f->color);*/
 		}
 	}
 	mlx_put_image_to_window(f->mlx, f->win, f->img.img, 0, 0);
 }
 
-/*
-void	handle_pixel(int x, int y, t_fractal *f)
+//color_func *g_color_schemes
+int	handle_pixel(t_fractal *f)
+{
+	int	iter;
+
+	iter = 0;
+	if (ft_strcmp(f->name, "mandelbrot") == 0)
+		iter = set_mandelbrot(f->z.r, f->z.i, f->max_iter, f->escape_value);
+	else if (ft_strcmp(f->name, "julia") == 0)
+		iter = set_julia(f, f->z.r, f->z.i);
+		//iter = set_julia(f->r, f->c, f->max_iter, f->escape_value);
+	return (iter);
+}
+
+/*void	handle_pixel(int x, int y, t_fractal *f)
 {
 	t_complex	z;
 	t_complex	c;

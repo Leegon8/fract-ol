@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 NAME = fractol
-SRC = fractal.c render.c set_init.c utils.c mandelbrot.c hooks.c
+SRC = fractal.c render.c set_init.c utils.c mandelbrot.c hooks.c colors.c \
+	julia.c
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 OBJ  = $(addprefix $(OBJ_PATH), $(SRC:.c=.o))

@@ -24,14 +24,6 @@ static void	data_init(t_fractal *f)
 	f->color_scheme = 0;
 }
 
-int handle_mouse_move(int x, int y, t_fractal *f)
-{
-	f->mouse_x = x;
-	f->mouse_y = y;
-	printf("Mouse moved to: (%d, %d)\n", x, y);
-	return (0);
-}
-
 void	init_fractal(t_fractal *f)
 {
 	f->mlx = mlx_init();
@@ -41,32 +33,4 @@ void	init_fractal(t_fractal *f)
 			&f->img.line_len, &f->img.endian);
 	hook_init(f);
 	data_init(f);
-	//mlx_loop(f->mlx);
 }
-
-/*void	init_fractal(t_fractal *f)
-{
-	f->mlx = mlx_init();
-	if (f->mlx == NULL)
-		malloc_error();
-	f->win = mlx_new_window(f->mlx, WIDTH, HEIGHT, f->name);
-	if (NULL == f->win)
-	{
-		mlx_destroy_window(f->mlx, f->win);
-		//mlx_destroy_display(f->mlx);
-		free(f->mlx);
-		malloc_error();
-	}
-	f->img.img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
-	if (f->img.img == NULL)
-	{
-		mlx_destroy_window(f->mlx, f->win);
-		//mlx_destroy_display(f->mlx);
-		free(f->mlx);
-		malloc_error();
-	}
-	f->img.pixels_ptr = mlx_get_data_addr(f->img.img, &f->img.bpp,
-			&f->img.line_len, &f->img.endian);
-	//events_init(f); //TODO
-	data_init(f);
-}*/
