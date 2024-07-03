@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   colors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 11:00:14 by lauriago          #+#    #+#             */
-/*   Updated: 2024/06/12 11:00:32 by lauriago         ###   ########.fr       */
+/*   Created: 2024/07/02 12:38:28 by lauriago          #+#    #+#             */
+/*   Updated: 2024/07/02 12:38:58 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
-int	color_one(int iter, int max_iter)
+int	color_wave(int iter, int max_iter)
 {
 	double	t;
 	int		r;
@@ -20,41 +20,13 @@ int	color_one(int iter, int max_iter)
 	int		b;
 
 	t = (double)iter / max_iter;
-	r = (unsigned char)(9 * (1 - t) * t * t * t * 255);
-	g = (unsigned char)(15 * (1 - t) * (1 - t) * t * t * 255);
-	b = (unsigned char)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
+	r = (int)(128.0 + 127.0 * cos(1.0 + t * 10.0));
+	g = (int)(128.0 + 127.0 * cos(2.0 + t * 10.0));
+	b = (int)(128.0 + 127.0 * cos(3.0 + t * 10.0));
 	return ((r << 16) | (g << 8) | b);
 }
 
-int	color_two(int iter, int max_iter)
-{
-	double	t;
-	int		r;
-	int		g;
-	int		b;
-
-	t = (double)iter / max_iter;
-	r = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
-	g = (int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
-	b = (int)(9 * (1 - t) * t * t * t * 255);
-	return ((r << 16) | (g << 8) | b);
-}
-
-int	color_third(int iter, int max_iter)
-{
-	double	t;
-	int		r;
-	int		g;
-	int		b;
-
-	t = (double)iter / max_iter;
-	r = (int)(255.0 * t);
-	g = (int)(255.0 * sin(5.0 * t));
-	b = (int)(255.0 * (1 - t));
-	return ((r << 16) | (g << 8) | b);
-}
-
-int	color_five(int iter, int max_iter)
+int	color_nuclear(int iter, int max_iter)
 {
 	double	t;
 	int		r;
@@ -63,7 +35,26 @@ int	color_five(int iter, int max_iter)
 
 	t = (double)iter / max_iter;
 	r = (int)(255 * t);
-	g = 0;
-	b = (int)(255 * t * t);
+	g = (int)(255 * t * t);
+	b = 0;
+	return ((r << 16) | (g << 8) | b);
+}
+
+int	color_six(int iter, int max_iter)
+{
+	double	t;
+	int		r;
+	int		g;
+	int		b;
+	int		l;
+
+	t = (double)iter / max_iter;
+	r = (int)(255 * (1 - t));
+	g = (int)(255 * sin(t * M_PI / 2));
+	b = (int)(255 * cos(t * M_PI / 2));
+	l = (int)(127 + 128 * sin(t * M_PI));
+	r = (r + l) / 2;
+	g = (g + l) / 2;
+	b = (b + l) / 2;
 	return ((r << 16) | (g << 8) | b);
 }

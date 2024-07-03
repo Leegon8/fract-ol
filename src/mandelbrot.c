@@ -39,24 +39,4 @@ int	set_mandelbrot(double r, double i, int max_iter, double escape_value)
 //Zn+1 = Zn^2 + C
 //Function calculates if the coordenate is part of the set; 
 //returns 1 if it is part and 0 if isn't part
-int	set_mandelbrot(t_fractal *f)
-{
-	double	zr;
-	double	zi;
-	int	iter;
-
-	f->zx = 0;
-	f->zy = 0;
-	iter = 0;
-	while (iter < MAX_ITER)
-	{
-		zr = f->zx * f->zx;
-		zi = f->zy * f->zy;
-		if (zr + zi > f->escape_value * f->escape_value)
-			return (1);
-		f->zy = 2.0 * f->zx * f->zy - f->zy;
-		f->zx = zr - zi + f->zx;
-		iter++;
-	}
-	return (0);
-}*/
+*/

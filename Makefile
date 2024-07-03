@@ -6,13 +6,13 @@
 #    By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 15:48:56 by lauriago          #+#    #+#              #
-#    Updated: 2024/06/05 12:43:25 by lauriago         ###   ########.fr        #
+#    Updated: 2024/07/03 10:30:35 by lauriago         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 SRC = fractal.c render.c set_init.c utils.c mandelbrot.c hooks.c colors.c \
-	julia.c
+	julia.c colors2.c
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 OBJ  = $(addprefix $(OBJ_PATH), $(SRC:.c=.o))
@@ -20,7 +20,7 @@ H_PATH = ./inc/
 HEADERS = -I$(H_PATH)
 
 RM = rm -f
-CC = gcc
+CC = gcc -fsanitize=address
 FLAGS = -g -Wall -Wextra -Werror
 LINKS = -Llibft -Lmlx -lmlx -framework OpenGL -framework AppKit
 LIBFT = libft/libft.a

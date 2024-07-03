@@ -6,25 +6,17 @@
 /*   By: lauriago <lauriago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:35:32 by lauriago          #+#    #+#             */
-/*   Updated: 2024/06/04 11:26:22 by lauriago         ###   ########.fr       */
+/*   Updated: 2024/07/02 11:59:30 by lauriago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 #include "../mlx_linux/mlx.h"
 
-color_func	g_color_schemes[] = {
-	color_one,
-	color_two,
-	color_wave,
-	color_third,
-	color_nuclear,
-	color_five,
-	color_six};
+t_color_func	g_color_schemes[] = {color_one, color_two, color_wave,
+	color_third, color_nuclear, color_five, color_six};
 
-
-
-int	main(int ac, char **av)
+int	fractal(int ac, char **av)
 {
 	t_fractal	f;
 
@@ -34,6 +26,7 @@ int	main(int ac, char **av)
 		init_fractal(&f);
 		fractal_render(&f);
 		mlx_loop(f.mlx);
+		return (1);
 	}
 	else if (ac == 4 && ft_strcmp(av[1], "julia") == 0)
 	{
@@ -43,8 +36,15 @@ int	main(int ac, char **av)
 		init_fractal(&f);
 		fractal_render(&f);
 		mlx_loop(f.mlx);
+		return (1);
 	}
-	else
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	fractal(ac, av);
+	if (fractal(ac, av) == 0)
 	{
 		ft_putstr_fd(ERROR_MESSAGE, STDERR_FILENO);
 		ft_putstr_fd(CORRECT_MANDELBROT_SET, STDERR_FILENO);
