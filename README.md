@@ -16,7 +16,7 @@ Este proyecto contiene una recreación visual de los fractales de **Mandelbrot**
       El conjunto de Julia es similar al de Mandelbrot pero depende de una constante específica. Esto permite observar variaciones únicas de los fractales según el valor de dicha constante, generando patrones diversos e igualmente complejos.<br>
   </td>
   <td>
-      <a><img align="center" width="350" src="https://github.com/user-attachments/assets/cb4f3769-7ce9-4a67-ae56-aafe8dfb9dc5"></a><br><br>
+      <a><img width="410" src="https://github.com/user-attachments/assets/cb4f3769-7ce9-4a67-ae56-aafe8dfb9dc5"></a><br><br>
       El conjunto de Mandelbrot se genera al iterar una función cuadrática compleja sobre cada punto en el plano complejo y verificar su divergencia. Los puntos que no divergen permanecen en el conjunto, formando una estructura con un borde intrincado e infinito.
   </td>
   </tr>
@@ -28,3 +28,8 @@ Para compilar y ejecutar el proyecto en Linux, asegúrate de tener las siguiente
 
 ```bash
 sudo apt-get update && sudo apt-get install xorg libxext-dev zlib1g-dev libbsd-dev
+```
+Una vez instaladas las dependencias ejecuta el comando siguiente con las opciones disponibles que te aparecerá:
+```bash
+make && ./fractol
+```
