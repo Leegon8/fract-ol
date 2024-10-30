@@ -33,3 +33,4 @@ Una vez instaladas las dependencias ejecuta el comando siguiente con las opcione
 ```bash
 make && ./fractol
 ```
+<a><img align="center" width="500" src="https://github.com/user-attachments/assets/cd649bc9-b5a8-4a10-9bd6-b48bbfa2415b"></a><br>
