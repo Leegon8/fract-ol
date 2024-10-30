@@ -36,10 +36,10 @@
 # define COLOR 99
 # define MAS 65451
 # define MENOS 65453
-// # define ARROW_UP 126
-// # define ARROW_DOWN 125
-// # define ARROW_LEFT 124
-// # define ARROW_RIGHT 123
+# define ARROW_UP 65362
+# define ARROW_DOWN 65364
+# define ARROW_LEFT 65363
+# define ARROW_RIGHT 65361
 # define ZOOM_IN 4
 # define ZOOM_OUT 5
 # define LEFT_CLICK 1
@@ -51,11 +51,22 @@
 # define NUM_3 85
 
 /*	Message error	*/
-# define ERROR_MESSAGE "Wrong arguments!\nPlease enter:\n"
-# define CORRECT_MANDELBROT_SET "\t\"./fractol mandelbrot\" OR\n"
+# define ERROR_MESSAGE "Wrong arguments!"
+# define CORRECT_MANDELBROT_SET "\nPlease enter:\n\t\"\
+./fractol mandelbrot\" OR\n"
 # define CORRECT_JULIA_SET "\t\"./fractol julia <value 1> <value 2>\"\n"
 
+# define RESET "\033[0m"
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define BOLD "\033[1m"
+# define BLUE "\033[34m"
+# define MAGENTA "\033[35m"
+# define CYAN "\033[36m"
+
 typedef int			(*t_color_func)(int, int);
+typedef char		*(t_inspo);
 
 /*		Complex number struct	 */
 typedef struct s_complex
@@ -112,12 +123,12 @@ int					set_mandelbrot(double r, double i, int max_iter,
 int					set_julia(t_fractal *f, double zr, double zi);
 
 /*____________UTILS______________*/
-// double		map_to_real(int x, int width, double min_r, double max_r);
-// double		map_to_imaginary(int y, int height, double min_i, double max_i);
 double				map_to_real(int x, int width, double center_r, double zoom);
 double				map_to_imaginary(int y, int height, double center_i,
 						double zoom);
-
+void				malloc_error(void);
+int					ft_close(t_fractal *f);
+/*___________COLORS_____________*/
 int					color_one(int iter, int max_iter);
 int					color_two(int iter, int max_iter);
 int					color_wave(int iter, int max_iter);
@@ -125,17 +136,14 @@ int					color_third(int iter, int max_iter);
 int					color_nuclear(int iter, int max_iter);
 int					color_five(int iter, int max_iter);
 int					color_six(int iter, int max_iter);
-void				malloc_error(void);
-int					ft_close(t_fractal *f);
 
 /*___________HOOKS_____________*/
 // void	hooks_init(t_fractal *f);
 int					handle_key(int keycode, t_fractal *f);
 int					mouse_handler(int button, int x, int y, t_fractal *f);
-int					mouse_move(int x, int y, t_fractal *f);
-int					mouse_press(int button, int x, int y, t_fractal *f);
-int					mouse_release(int button);
+void				move_fractal(t_fractal *f, int keycode);
 void				hook_init(t_fractal *f);
+void				inspiration_key(void);
 
 extern t_color_func	g_color_schemes[];
 

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
-#include "../mlx_linux/mlx.h"
 
 // 1. gestionar zoom -> segun coordenadas del ratón
 //	hacer la iteración multiplicado x 1.5
